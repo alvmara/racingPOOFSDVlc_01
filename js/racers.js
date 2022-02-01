@@ -79,8 +79,8 @@ function empezarJuego() {
     console.log({ team1, team2 });
 
     //actualizar contadores de los coches con los metros recorridos
-    actualizarContador(team1);
-    actualizarContador(team2);
+    actualizarContador(team1, 1);
+    actualizarContador(team2, 2);
 
     if (team1.metrosRecorridos >= metrosTotales) {
       //el team1 ha ganado
@@ -93,13 +93,17 @@ function empezarJuego() {
   //ya sabemos el ganador
   console.log({ ganador });
   //1.cambiar a la pantalla de ganador
-  cambiaPantalla(4);
+  //cambiaPantalla(4);
   //2. mostrar los datos del ganador
   mostrarDatosCarrera();
 }
 
-function actualizarContador(team) {
+function actualizarContador(team, indice) {
   //to do
+  const selectorCss = `#team${indice}-metros span.metros`;
+  const spanMetros = document.querySelector(selectorCss);
+
+  spanMetros.innerText = team.metrosRecorridos;
 }
 
 function mostrarDatosCarrera() {
