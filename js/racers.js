@@ -1,4 +1,3 @@
-
 //Declaración de la clase Coche
 // class Coche {
 
@@ -30,35 +29,32 @@
 // let coche4 = new Coche("Camaro","Mercedes",299,1750,90,"Diesel");
 
 class Coche {
-    constructor(marca, modelo) {
-        this.marca = marca;
-        this.modelo = modelo;
+  constructor(marca, modelo) {
+    this.marca = marca;
+    this.modelo = modelo;
 
-        this.metrosRecorridos = 0;
-    }
+    this.metrosRecorridos = 0;
+  }
 
-    avanzar() {
-        const metrosARecorrer = Math.round(Math.random() * 50);
-        this.metrosRecorridos += metrosARecorrer;
-    }
+  avanzar() {
+    const metrosARecorrer = Math.round(Math.random() * 50);
+    this.metrosRecorridos += metrosARecorrer;
+  }
 }
 
-
-let coche1 = new Coche("BMW", "Gt")
+let coche1 = new Coche("BMW", "Gt");
 let coche2 = new Coche("Chevrolet", "Celica");
 let coche3 = new Coche("Jaguar", "TestaRossa");
 let coche4 = new Coche("Mercedes", "Camaro");
 
-
-
 //Genero un traductor/diccionario de JS
 
 let allCars = {
-    1 : coche1,
-    2 : coche2,
-    3 : coche3,
-    4 : coche4
-}
+  1: coche1,
+  2: coche2,
+  3: coche3,
+  4: coche4,
+};
 
 //Generando variables básicas de entorno
 
@@ -68,14 +64,44 @@ let team2 = null;
 
 let ganador = null;
 
-
 const configuracion = {
-    vueltas: 3,
-    metrosPorVuelta: 100,
+  vueltas: 3,
+  metrosPorVuelta: 100,
+};
 
+function empezarJuego() {
+  const metrosTotales = configuracion.vueltas * configuracion.metrosPorVuelta;
+
+  while (ganador === null) {
+    //logica del juego
+    team1.avanzar();
+    team2.avanzar();
+    console.log({ team1, team2 });
+
+    //actualizar contadores de los coches con los metros recorridos
+    actualizarContador(team1);
+    actualizarContador(team2);
+
+    if (team1.metrosRecorridos >= metrosTotales) {
+      //el team1 ha ganado
+      ganador = team1;
+    } else if (team2.metrosRecorridos >= metrosTotales) {
+      ganador = team2;
+    }
+  }
+
+  //ya sabemos el ganador
+  console.log({ ganador });
+  //1.cambiar a la pantalla de ganador
+  cambiaPantalla(4);
+  //2. mostrar los datos del ganador
+  mostrarDatosCarrera();
 }
 
-function empezarJuego () {
+function actualizarContador(team) {
+  //to do
+}
 
-
+function mostrarDatosCarrera() {
+  //to do
 }
