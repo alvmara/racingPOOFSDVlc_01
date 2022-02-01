@@ -35,32 +35,40 @@ const cambiaPantalla = (cambio) => {
 
 }
 
+/**
+ * Esta es una función vacía que no hace nada
+ */
+function noop() {}
+
 const selectCar = (nCoche) => {
-    
-    if(team1 == ""){
+
+    console.log('Se ha seleccionado el coche numero ' + nCoche)
+
+    if(team1 == null){
         team1 = allCars[nCoche];
         let cochePrimero = document.getElementById(nCoche);
-        let datosCoche = document.getElementById("data"+ 1);
+        let datosCoche = document.getElementById("data1");
+
         //una vez he escogido el coche, invalido el img para que nadie haga onclick sobre él
-        cochePrimero.disabled = true;
+        cochePrimero.onclick = noop;
         cochePrimero.classList.add("carSelected");
-        datosCoche.innerHTML = `${team1.marca}`;
-    
-        
-    } else if (team2 == ""){
+        datosCoche.innerHTML = team1.marca;
+    } else if (team2 == null){
         team2 = allCars[nCoche];
         let cocheSegundo = document.getElementById(nCoche);
-        cocheSegundo.disabled = true;
+        let datosCoche = document.getElementById("data2");
+
+        cocheSegundo.onclick = noop;
         cocheSegundo.classList.add("carSelected");
-
-        console.log(team1,team2);
-
+        datosCoche.innerHTML = team2.marca;
         //una vez he escogido los dos coches.........
 
-        setTimeout(()=>{
-            cambiaPantalla(3);
-        },2500);
+        // setTimeout(()=>{
+        //     cambiaPantalla(3);
+        // },2500);
     }
+
+    console.log({ team1, team2 })
 } 
 
-//Algortimo
+//Algortimo1

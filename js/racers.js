@@ -1,33 +1,55 @@
 
 //Declaración de la clase Coche
+// class Coche {
+
+//     constructor(modelo, marca, velocidad, peso, frenada, combustible) {
+//         this.modelo = modelo;
+//         this.marca = marca;
+//         this.velocidad = velocidad;
+//         this.peso = peso;
+//         this.frenada = frenada;
+//         this.combustible = combustible;
+//         this.metros = 0;
+//     }
+
+//     acelerar() {
+//         return this.velocidad += 30;
+//     }
+
+//     frenar() {
+//         return this.velocidad = 0;
+//     }
+
+// };
+
+// //Instanciando corredores...
+
+// let coche1 = new Coche("Gt","BMW",250,2000,50,"Gasolina")
+// let coche2 = new Coche("Celica","Chevrolet",251,1900,70,"Gasolina");
+// let coche3 = new Coche("TestaRossa","Jaguar",270,2300,55,"Gasolina");
+// let coche4 = new Coche("Camaro","Mercedes",299,1750,90,"Diesel");
+
 class Coche {
-
-    constructor(modelo, marca, velocidad, peso, frenada, combustible) {
-        this.modelo = modelo;
+    constructor(marca, modelo) {
         this.marca = marca;
-        this.velocidad = velocidad;
-        this.peso = peso;
-        this.frenada = frenada;
-        this.combustible = combustible;
-        this.metros = 0;
+        this.modelo = modelo;
+
+        this.metrosRecorridos = 0;
     }
 
-    acelerar() {
-        return this.velocidad += 30;
+    avanzar() {
+        const metrosARecorrer = Math.round(Math.random() * 50);
+        this.metrosRecorridos += metrosARecorrer;
     }
+}
 
-    frenar() {
-        return this.velocidad = 0;
-    }
 
-};
+let coche1 = new Coche("BMW", "Gt")
+let coche2 = new Coche("Chevrolet", "Celica");
+let coche3 = new Coche("Jaguar", "TestaRossa");
+let coche4 = new Coche("Mercedes", "Camaro");
 
-//Instanciando corredores...
 
-let coche1 = new Coche("Gt","BMW",250,2000,50,"Gasolina")
-let coche2 = new Coche("Celica","Chevrolet",251,1900,70,"Gasolina");
-let coche3 = new Coche("TestaRossa","Jaguar",270,2300,55,"Gasolina");
-let coche4 = new Coche("Camaro","Mercedes",299,1750,90,"Diesel");
 
 //Genero un traductor/diccionario de JS
 
@@ -40,8 +62,20 @@ let allCars = {
 
 //Generando variables básicas de entorno
 
-let team1 = "";
+let team1 = null;
 
-let team2 = "";
+let team2 = null;
 
-let ganador = "";
+let ganador = null;
+
+
+const configuracion = {
+    vueltas: 3,
+    metrosPorVuelta: 100,
+
+}
+
+function empezarJuego () {
+
+
+}
