@@ -61,7 +61,21 @@ const selectCar = (nCoche) => {
 
     setTimeout(() => {
       cambiaPantalla(3);
-      empezarJuego();
+      window.addEventListener("keydown", Mi_función);
+
+      function Mi_función(evento) {
+        console.log(evento, evento.keyCode);
+        if (evento.keyCode === 39) {
+          avanzar();
+          actualizarGanador();
+
+          if (ganador !== null) {
+            window.removeEventListener("keydown", Mi_función);
+            cambiaPantalla(4);
+            mostrarDatosCarrera();
+          }
+        }
+      }
     }, 2500);
   }
 

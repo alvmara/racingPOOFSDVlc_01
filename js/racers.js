@@ -69,32 +69,26 @@ const configuracion = {
   metrosPorVuelta: 100,
 };
 
-function empezarJuego() {
-  const metrosTotales = configuracion.vueltas * configuracion.metrosPorVuelta;
+const metrosTotales = configuracion.vueltas * configuracion.metrosPorVuelta;
+function avanzar() {
+  team1.avanzar();
+  team2.avanzar();
+  console.log({ team1, team2 });
 
-  while (ganador === null) {
-    //logica del juego
-    team1.avanzar();
-    team2.avanzar();
-    console.log({ team1, team2 });
+  //actualizar contadores de los coches con los metros recorridos
+  actualizarContador(team1, 1);
+  actualizarContador(team2, 2);
+}
 
-    //actualizar contadores de los coches con los metros recorridos
-    actualizarContador(team1, 1);
-    actualizarContador(team2, 2);
-
-    if (team1.metrosRecorridos >= metrosTotales) {
-      //el team1 ha ganado
-      ganador = team1;
-    } else if (team2.metrosRecorridos >= metrosTotales) {
-      ganador = team2;
-    }
+function actualizarGanador() {
+  if (team1.metrosRecorridos >= metrosTotales) {
+    //el team1 ha ganado
+    ganador = team1;
+  } else if (team2.metrosRecorridos >= metrosTotales) {
+    ganador = team2;
   }
-
-  //ya sabemos el ganador
-  console.log({ ganador });
-  //1.cambiar a la pantalla de ganador
-  //cambiaPantalla(4);
-  //2. mostrar los datos del ganador
+}
+async function empezarJuego() {
   mostrarDatosCarrera();
 }
 
