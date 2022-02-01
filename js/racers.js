@@ -40,9 +40,6 @@ let allCars = {
 
 //Generando variables básicas de entorno
 
-
-
-
 let team1 = "";
 
 let team2 = "";
