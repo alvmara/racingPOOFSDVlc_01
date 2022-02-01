@@ -24,18 +24,27 @@ class Coche {
 
 //Instanciando corredores...
 
-let coche1 = new Coche("Gt","Ford",250,2000,50,"Gasolina")
-let coche2 = new Coche("Celica","Toyota",251,1900,70,"Gasolina");
-let coche3 = new Coche("TestaRossa","Ferrari",270,2300,55,"Gasolina");
-let coche4 = new Coche("Camaro","Chevrolet",299,1750,90,"Diesel");
+let coche1 = new Coche("Gt","BMW",250,2000,50,"Gasolina")
+let coche2 = new Coche("Celica","Chevrolet",251,1900,70,"Gasolina");
+let coche3 = new Coche("TestaRossa","Jaguar",270,2300,55,"Gasolina");
+let coche4 = new Coche("Camaro","Mercedes",299,1750,90,"Diesel");
 
+//Genero un traductor/diccionario de JS
+
+let allCars = {
+    1 : coche1,
+    2 : coche2,
+    3 : coche3,
+    4 : coche4
+}
 
 //Generando variables básicas de entorno
 
-let allCars = [coche1,coche2,coche3,coche4];
 
-let team1 = [];
 
-let team2 = [];
+
+let team1 = "";
+
+let team2 = "";
 
 let ganador = "";

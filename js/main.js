@@ -2,8 +2,8 @@
 //Funciones
 
 const cleanGame = () => {
-    team1 = [];
-    team2 = [];
+    team1 = "";
+    team2 = "";
     ganador = "";
 }
 
@@ -34,5 +34,31 @@ const cambiaPantalla = (cambio) => {
 
 
 }
+
+const selectCar = (nCoche) => {
+    
+    if(team1 == ""){
+        team1 = allCars[nCoche];
+        let cochePrimero = document.getElementById(nCoche);
+        //una vez he escogido el coche, invalido el img para que nadie haga onclick sobre él
+        cochePrimero.disabled = true;
+        cochePrimero.classList.add("carSelected");
+
+        
+    } else if (team2 == ""){
+        team2 = allCars[nCoche];
+        let cocheSegundo = document.getElementById(nCoche);
+        cocheSegundo.disabled = true;
+        cocheSegundo.classList.add("carSelected");
+
+        console.log(team1,team2);
+
+        //una vez he escogido los dos coches.........
+
+        setTimeout(()=>{
+            cambiaPantalla(3);
+        },2500);
+    }
+} 
 
 //Algortimo
