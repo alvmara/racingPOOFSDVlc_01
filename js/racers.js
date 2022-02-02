@@ -40,6 +40,10 @@ class Coche {
     const metrosARecorrer = Math.round(Math.random() * 50);
     this.metrosRecorridos += metrosARecorrer;
   }
+
+  resetearMetros() {
+    this.metrosRecorridos = 0;
+  }
 }
 
 let coche1 = new Coche("BMW", "Gt");
@@ -49,12 +53,7 @@ let coche4 = new Coche("Mercedes", "Camaro");
 
 //Genero un traductor/diccionario de JS
 
-let allCars = {
-  1: coche1,
-  2: coche2,
-  3: coche3,
-  4: coche4,
-};
+const allCars = [coche1, coche2, coche3, coche4];
 
 //Generando variables básicas de entorno
 

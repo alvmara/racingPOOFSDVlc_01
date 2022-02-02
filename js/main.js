@@ -2,9 +2,29 @@
 
 const cleanGame = () => {
   console.log("limpiando variables");
+  //Limpiar kilometros recorridos de los coches
+  team1.resetearMetros();
+  team2.resetearMetros();
+
+  //Limpiar los datos de carrera
+  actualizarContador(team1, 1);
+  actualizarContador(team2, 2);
+
   team1 = null;
   team2 = null;
   ganador = null;
+
+  //Limpiar los nombres elegidos
+  document.getElementById("data-team-1").innerText = "";
+  document.getElementById("data-team-2").innerText = "";
+  //Limpiar
+
+  // Habilitamos los botones
+  const enableButtons = (button) => {
+    button.disabled = false;
+  };
+
+  document.querySelectorAll("button").forEach(enableButtons);
 };
 
 const cambiaPantalla = (cambio) => {
@@ -14,7 +34,7 @@ const cambiaPantalla = (cambio) => {
 
   //Cada vez que entramos en la funcion se regenera el array con todas las pantallas, ya
   //que anteriormente al filtrar algunas quedaban fuera, así empieza de nuevo el proceso
-  let arrayPantallas = ["screen1", "screen2", "screen3", "screen4"];
+  let arrayPantallas = ["screen0", "screen1", "screen2", "screen3"];
 
   //Aquí filtramos del array aquella pantalla a la que queremos ir, ES DECIR,
   //guardamos todas las pantallas menos aquella a la que queremos ir, ya que al resto a todas
@@ -38,30 +58,36 @@ const cambiaPantalla = (cambio) => {
  */
 function noop() {}
 
+const selectorBtnCoche = "btn-select-car-";
+
 const selectCar = (nCoche) => {
   console.log("Se ha seleccionado el coche numero " + nCoche);
 
   if (team1 == null) {
     team1 = allCars[nCoche];
-    let cochePrimero = document.getElementById(nCoche);
-    let datosCoche = document.getElementById("data1");
+    const selector = `${selectorBtnCoche}${nCoche}`;
+    const btnSeleccionCoche = document.getElementById(selector);
+    const datosCoche = document.getElementById("data-team-1");
 
     //una vez he escogido el coche, invalido el img para que nadie haga onclick sobre él
-    cochePrimero.onclick = noop;
-    cochePrimero.classList.add("carSelected");
+    btnSeleccionCoche.disabled = true;
+    // btnSeleccionCoche.classList.add("carSelected");
     datosCoche.innerHTML = team1.marca;
   } else if (team2 == null) {
     team2 = allCars[nCoche];
-    let cocheSegundo = document.getElementById(nCoche);
-    let datosCoche = document.getElementById("data2");
+    const selector = `${selectorBtnCoche}${nCoche}`;
+    const btnSeleccionCoche = document.getElementById(selector);
+    const datosCoche = document.getElementById("data-team-2");
 
-    cocheSegundo.onclick = noop;
-    cocheSegundo.classList.add("carSelected");
+    //una vez he escogido el coche, invalido el img para que nadie haga onclick sobre él
+    btnSeleccionCoche.disabled = true;
+    // btnSeleccionCoche.classList.add("carSelected");
     datosCoche.innerHTML = team2.marca;
+
     //una vez he escogido los dos coches.........
 
     setTimeout(() => {
-      cambiaPantalla(3);
+      cambiaPantalla(2);
       window.addEventListener("keydown", onKeyDown);
 
       function onKeyDown(evento) {
@@ -72,7 +98,7 @@ const selectCar = (nCoche) => {
 
           if (ganador !== null) {
             window.removeEventListener("keydown", onKeyDown);
-            cambiaPantalla(4);
+            cambiaPantalla(3);
             mostrarDatosCarrera();
           }
         }

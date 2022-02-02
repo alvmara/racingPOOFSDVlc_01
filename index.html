@@ -11,31 +11,42 @@
 <body>
     
     
-    <section id="screen1" onclick="cambiaPantalla(2)">
-        <div class="designScreen1"></div>
+    <section id="screen0" onclick="cambiaPantalla(1)">
+        <div class="designScreen0"></div>
     </section>
 
-    <section id="screen2" style="display:none">
-        <div class="designScreen2">
+    <section id="screen1" style="display:none">
+        <div class="designScreen1">
             <div class="carOptions">
-                <img id=1 class="carChoosing" src='img/bmw.jpg' onclick="selectCar(1)"/>
-                <img id=2 class="carChoosing" src='img/chevrolet.jpg' onclick="selectCar(2)"/>
-                <img id=3 class="carChoosing" src='img/jaguar.jpg' onclick="selectCar(3)"/>
-                <img id=4 class="carChoosing" src='img/mercedes.jpg' onclick="selectCar(4)"/>
+                <button id="btn-select-car-0" onclick="selectCar(0)">
+                    <img class="carChoosing" src='img/bmw.jpg' />
+                </button>
+
+                <button id="btn-select-car-1" onclick="selectCar(1)">
+                    <img class="carChoosing" src='img/chevrolet.jpg' />
+                </button>
+                
+                <button id="btn-select-car-2" onclick="selectCar(2)">
+                    <img class="carChoosing" src='img/jaguar.jpg' />
+                </button>
+                
+                <button id="btn-select-car-3" onclick="selectCar(3)">
+                    <img class="carChoosing" src='img/mercedes.jpg' />
+                </button>
             </div>
             <div class="carSelection">
-                <div id="data1" class="dataCar">
+                <div id="data-team-1" class="dataCar">
                     
                 </div>
-                <div id="data2" class="dataCar">
+                <div id="data-team-2" class="dataCar">
                     
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="screen3" style="display:none" onclick="cambiaPantalla(4)">
-        <div class="designScreen3">
+    <section id="screen2" style="display:none" onclick="cambiaPantalla(2)">
+        <div class="designScreen2">
             <div id="team1-metros">
                 <p>Team 1: <span class="metros">0</span> Km</p>
             </div>
@@ -45,8 +56,8 @@
         </div>
     </section>
 
-    <section id="screen4" style="display:none" onclick="cambiaPantalla(1); cleanGame()">
-        <div class="designScreen4"></div>
+    <section id="screen3" style="display:none" onclick="cambiaPantalla(0); cleanGame()">
+        <div class="designScreen3"></div>
     </section>
 
     <script src="js/racers.js"></script>
