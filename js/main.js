@@ -1,9 +1,10 @@
 //Funciones
 
 const cleanGame = () => {
-  team1 = "";
-  team2 = "";
-  ganador = "";
+  console.log("limpiando variables");
+  team1 = null;
+  team2 = null;
+  ganador = null;
 };
 
 const cambiaPantalla = (cambio) => {
@@ -61,16 +62,16 @@ const selectCar = (nCoche) => {
 
     setTimeout(() => {
       cambiaPantalla(3);
-      window.addEventListener("keydown", Mi_función);
+      window.addEventListener("keydown", onKeyDown);
 
-      function Mi_función(evento) {
+      function onKeyDown(evento) {
         console.log(evento, evento.keyCode);
         if (evento.keyCode === 39) {
           avanzar();
           actualizarGanador();
 
           if (ganador !== null) {
-            window.removeEventListener("keydown", Mi_función);
+            window.removeEventListener("keydown", onKeyDown);
             cambiaPantalla(4);
             mostrarDatosCarrera();
           }
