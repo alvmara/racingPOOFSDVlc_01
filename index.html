@@ -11,28 +11,19 @@
 <body>
     
     
-    <section id="screen0" onclick="cambiaPantalla(1)">
-        <div class="designScreen0"></div>
+    <section id="screen0">
+        <div class="designScreen0">
+            <div style="margin-left: 20px;">
+                <h1>Gran Turismo</h1>
+                <button onclick="cambiaPantalla(1)">Haz click para empezar</button>
+            </div>
+        </div>
     </section>
 
     <section id="screen1" style="display:none">
         <div class="designScreen1">
             <div class="carOptions">
-                <button id="btn-select-car-0" onclick="selectCar(0)">
-                    <img class="carChoosing" src='img/bmw.jpg' />
-                </button>
-
-                <button id="btn-select-car-1" onclick="selectCar(1)">
-                    <img class="carChoosing" src='img/chevrolet.jpg' />
-                </button>
-                
-                <button id="btn-select-car-2" onclick="selectCar(2)">
-                    <img class="carChoosing" src='img/jaguar.jpg' />
-                </button>
-                
-                <button id="btn-select-car-3" onclick="selectCar(3)">
-                    <img class="carChoosing" src='img/mercedes.jpg' />
-                </button>
+                <!--Aqui es donde se añadirán los botones de sleccion de coche-->
             </div>
             <div class="carSelection">
                 <div id="data-team-1" class="dataCar">
@@ -60,6 +51,7 @@
         <div class="designScreen3"></div>
     </section>
 
+    <script src="js/coches.js"></script>
     <script src="js/racers.js"></script>
     <script src="js/main.js"></script>
 </body>

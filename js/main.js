@@ -53,11 +53,6 @@ const cambiaPantalla = (cambio) => {
   }
 };
 
-/**
- * Esta es una función vacía que no hace nada
- */
-function noop() {}
-
 const selectorBtnCoche = "btn-select-car-";
 
 const selectCar = (nCoche) => {
