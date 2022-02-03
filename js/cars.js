@@ -81,16 +81,11 @@ const createCarButton = (carConfiguration) => {
   const button = document.createElement("button");
   const img = document.createElement("img");
 
-  button.addEventListener("click", () => {
-    button.disabled = true;
-
-    const car = new Coche(carConfiguration.marca, carConfiguration.modelo);
-    teamCarsList.push(car);
-
-    if (teamCarsList.length === teamsNumber) {
-      // Empezar juego
-    }
-  });
+  /**
+   * añadimos el evento de click al boton de seleccion de coche
+   * de momento ponemos aqui toda la logica del juego
+   */
+  button.addEventListener("click", () => onSelectCar(carConfiguration));
 
   img.classList.add("carChoosing");
   img.src = carConfiguration.img;
@@ -99,15 +94,55 @@ const createCarButton = (carConfiguration) => {
   container.appendChild(button);
 };
 
-const initCarButton = () => {
+const initCarButtons = () => {
   carsConfiguration.forEach((coche) => createCarButton(coche));
+};
+
+function onSelectCar(carConfiguration) {
+  this.disabled = true;
+
+  const car = new Coche(carConfiguration.marca, carConfiguration.modelo);
+  teamCarsList.push(car);
+
+  // Cambiar el estado del team que selecciona
+  changeActualSelectingTeam();
+  drawActualSelectingTeam();
+
+  if (teamCarsList.length === teamsNumber) {
+    // Deshabilitar todos los botones
+    setCarButtonsEnabled(false);
+    // Empezar juego
+    startGame();
+  }
+}
+
+const setCarButtonsEnabled = (enabled) => {
+  const buttons = document.querySelectorAll(".carOptions button");
+  buttons.forEach((button) => (button.disabled = !enabled));
+};
+
+const startGame = () => {
+  setTimeout(() => {
+    cambiaPantalla(2);
+    window.addEventListener("keydown", onKeyDown);
+
+    function onKeyDown(evento) {
+      console.log(evento, evento.keyCode);
+      if (evento.keyCode === 39) {
+        avanzar();
+        actualizarGanador();
+
+        if (ganador !== null) {
+          window.removeEventListener("keydown", onKeyDown);
+          cambiaPantalla(3);
+          mostrarDatosCarrera();
+        }
+      }
+    }
+  }, 2500);
 };
 
 /**
  * Inicialiazamos
  */
-initCarButton();
-
-// const carsList = carsConfiguration.map((car) => {
-//   return new Coche(car.marca, car.modelo);
-// });
+initCarButtons();
