@@ -15,6 +15,7 @@
 <body>
     
     
+    <!--Pagina principal-->
     <section id="screen0">
         <div class="designScreen0">
             <div style="margin-left: 20px;">
@@ -24,6 +25,7 @@
         </div>
     </section>
 
+    <!--Pagina de sleccion de coches-->
     <section id="screen1" style="display:none">
         <div class="designScreen1">
             <h1 class="player-car-chossing-title">Elige el coche para el jugador <span id="player-car-chossing-number"></span> </h1>
@@ -33,28 +35,28 @@
             </div>
 
 
-            <div class="carSelection">
-                <div id="data-team-1" class="dataCar">
-                    
-                </div>
-                <div id="data-team-2" class="dataCar">
-                    
-                </div>
-            </div>
+            <!-- <div class="carSelection"></div> -->
         </div>
     </section>
 
+    <!--Pagina de la carrera-->
     <section id="screen2" style="display:none" onclick="cambiaPantalla(2)">
         <div class="designScreen2">
-            <div id="team1-metros">
+            <div id="racer-container">
+                <!--Aqui es donde se van a añadir los cocohes y sus km recorridos-->
+            </div>
+
+
+            <!-- <div id="team1-metros">
                 <p>Team 1: <span class="metros">0</span> Km</p>
             </div>
             <div id="team2-metros">
                 <p>Team 2: <span class="metros">0</span> Km</p>
-            </div>
+            </div> -->
         </div>
     </section>
 
+    <!--Pagina de ranking de ganador-->
     <section id="screen3" style="display:none" onclick="cambiaPantalla(0); cleanGame()">
         <div class="designScreen3"></div>
     </section>

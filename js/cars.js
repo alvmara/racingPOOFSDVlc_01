@@ -62,12 +62,12 @@ class Coche {
     this.metrosRecorridos = 0;
   }
 
-  avanzar() {
+  run() {
     const metrosARecorrer = Math.round(Math.random() * 50);
     this.metrosRecorridos += metrosARecorrer;
   }
 
-  resetearMetros() {
+  resetMeters() {
     this.metrosRecorridos = 0;
   }
 }
@@ -98,6 +98,10 @@ const initCarButtons = () => {
   carsConfiguration.forEach((coche) => createCarButton(coche));
 };
 
+/**
+ * esta funcion se ejecuta se hace click en un boton de seleccion de coche
+ * @param {*} carConfiguration
+ */
 function onSelectCar(carConfiguration) {
   this.disabled = true;
 
@@ -124,22 +128,59 @@ const setCarButtonsEnabled = (enabled) => {
 const startGame = () => {
   setTimeout(() => {
     cambiaPantalla(2);
+    drawRacerState();
+
     window.addEventListener("keydown", onKeyDown);
 
     function onKeyDown(evento) {
-      console.log(evento, evento.keyCode);
       if (evento.keyCode === 39) {
-        avanzar();
-        actualizarGanador();
+        runCars();
+        drawRacerState();
 
-        if (ganador !== null) {
-          window.removeEventListener("keydown", onKeyDown);
-          cambiaPantalla(3);
-          mostrarDatosCarrera();
-        }
+        // TODO:
+
+        // actualizarGanador();
+        // if (ganador !== null) {
+        //   window.removeEventListener("keydown", onKeyDown);
+        //   cambiaPantalla(3);
+        //   mostrarDatosCarrera();
+        // }
       }
     }
   }, 2500);
+};
+
+function drawRacerState() {
+  const container = document.getElementById("racer-container");
+
+  const copyTeamCarList = [...teamCarsList].sort(
+    (car1, car2) => car2.metrosRecorridos - car1.metrosRecorridos
+  );
+
+  let divsInfo = copyTeamCarList.map((car) => {
+    const div = document.createElement("div");
+    const divMarca = document.createElement("div");
+    const divModelo = document.createElement("div");
+    const divMetros = document.createElement("div");
+
+    divMarca.innerText = car.marca;
+    divModelo.innerText = car.modelo;
+    divMetros.innerText = car.metrosRecorridos + " metros";
+
+    div.appendChild(divMarca);
+    div.appendChild(divModelo);
+    div.appendChild(divMetros);
+
+    return div;
+  });
+
+  [...(container.children || [])].forEach((div) => container.removeChild(div));
+
+  divsInfo.forEach((div) => container.appendChild(div));
+}
+
+const runCars = () => {
+  teamCarsList.forEach((car) => car.run());
 };
 
 /**
