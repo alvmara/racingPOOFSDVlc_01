@@ -1,4 +1,4 @@
-const coches = [
+const carsConfiguration = [
   {
     marca: "Lexus",
     modelo: "RC F GT3 (Emil Frey Racing)",
@@ -51,16 +51,63 @@ const coches = [
   },
 ];
 
-const createCarButton = (coche) => {
+/**
+ * Clase Coche
+ */
+class Coche {
+  constructor(marca, modelo) {
+    this.marca = marca;
+    this.modelo = modelo;
+
+    this.metrosRecorridos = 0;
+  }
+
+  avanzar() {
+    const metrosARecorrer = Math.round(Math.random() * 50);
+    this.metrosRecorridos += metrosARecorrer;
+  }
+
+  resetearMetros() {
+    this.metrosRecorridos = 0;
+  }
+}
+
+/**
+ * Función para crear botones de selección de coche
+ * @param {*} carConfiguration
+ */
+const createCarButton = (carConfiguration) => {
   const container = document.getElementsByClassName("carOptions")[0];
   const button = document.createElement("button");
   const img = document.createElement("img");
 
+  button.addEventListener("click", () => {
+    button.disabled = true;
+
+    const car = new Coche(carConfiguration.marca, carConfiguration.modelo);
+    teamCarsList.push(car);
+
+    if (teamCarsList.length === teamsNumber) {
+      // Empezar juego
+    }
+  });
+
   img.classList.add("carChoosing");
-  img.src = coche.img;
+  img.src = carConfiguration.img;
 
   button.appendChild(img);
   container.appendChild(button);
 };
 
-coches.forEach((coche) => createCarButton(coche));
+const initCarButton = () => {
+  carsConfiguration.forEach((coche) => createCarButton(coche));
+};
+
+/**
+ * Inicialiazamos
+ */
+initCarButton();
+
+// const carsList = carsConfiguration.map((car) => {
+//   return new Coche(car.marca, car.modelo);
+// });
