@@ -128,6 +128,9 @@ const setCarButtonsEnabled = (enabled) => {
   buttons.forEach((button) => (button.disabled = !enabled));
 };
 
+/**
+ * Lógica de la carrera (El juego)
+ */
 const raceConfiguration = {
   steps: 3,
   stepMeters: 100,
@@ -141,14 +144,18 @@ const hasTeamFinish = (team, raceConfiguration) => {
   return team.metrosRecorridos >= totalMeters;
 };
 
-const hasRaceEnd = (teams, raceConfiguration) => {
-  return teams.every((team) => hasTeamFinish(team, raceConfiguration));
-};
+// const hasRaceEnd = (teams, raceConfiguration) => {
+//   return teams.every((team) => hasTeamFinish(team, raceConfiguration));
+// };
+
+let ranking = [];
 
 const startGame = () => {
   setTimeout(() => {
+    let raceCarsList = [...teamCarsList];
+
     cambiaPantalla("race-game");
-    drawRacerState();
+    drawRacerState(raceCarsList);
 
     window.addEventListener("keydown", onKeyDown);
 
@@ -157,25 +164,44 @@ const startGame = () => {
         return;
       }
 
-      runCars();
-      drawRacerState();
+      runCars(raceCarsList);
+      drawRacerState(raceCarsList);
 
-      if (hasRaceEnd(teamCarsList, raceConfiguration)) {
-        // la carrera ha acabado
+      const finishedCars = raceCarsList.filter((car) =>
+        hasTeamFinish(car, raceConfiguration)
+      );
+
+      const notFinishedCars = raceCarsList.filter(
+        (car) => !hasTeamFinish(car, raceConfiguration)
+      );
+
+      ranking = [...ranking, ...finishedCars];
+
+      raceCarsList = notFinishedCars;
+
+      console.log(ranking);
+
+      const hasRaceEnd = raceCarsList.length === 0;
+
+      if (hasRaceEnd) {
         console.log("La carrera ha acabado");
+
+        window.removeEventListener("keydown", onKeyDown);
+
+        cambiaPantalla("ranking");
       }
     }
   }, 2500);
 };
 
-function drawRacerState() {
+function drawRacerState(raceCarsList) {
   const container = document.getElementById("racer-container");
 
-  const copyTeamCarList = [...teamCarsList].sort(
-    (car1, car2) => car2.metrosRecorridos - car1.metrosRecorridos
-  );
+  const copyRaceCarsList = [...raceCarsList]
+    .filter((team) => !hasTeamFinish(team, raceConfiguration))
+    .sort((car1, car2) => car2.metrosRecorridos - car1.metrosRecorridos);
 
-  let divsInfo = copyTeamCarList.map((car) => {
+  let divsInfo = copyRaceCarsList.map((car) => {
     const div = document.createElement("div");
     const divMarca = document.createElement("div");
     const divModelo = document.createElement("div");
@@ -197,8 +223,8 @@ function drawRacerState() {
   divsInfo.forEach((div) => container.appendChild(div));
 }
 
-const runCars = () => {
-  teamCarsList.forEach((car) => car.run());
+const runCars = (raceCarsList) => {
+  raceCarsList.forEach((car) => car.run());
 };
 
 /**
