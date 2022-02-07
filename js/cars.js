@@ -55,10 +55,10 @@ const carsConfiguration = [
  * Clase Coche
  */
 class Coche {
-  constructor(marca, modelo) {
+  constructor(marca, modelo, img) {
     this.marca = marca;
     this.modelo = modelo;
-
+    this.img = img;
     this.metrosRecorridos = 0;
   }
 
@@ -87,7 +87,7 @@ const createCarButton = (carConfiguration) => {
    * añadimos el evento de click al boton de seleccion de coche
    * de momento ponemos aqui toda la logica del juego
    */
-  button.addEventListener("click", () => onSelectCar(carConfiguration));
+  button.addEventListener("click", onSelectCar.bind(button, carConfiguration));
 
   img.classList.add("carChoosing");
   img.src = carConfiguration.img;
@@ -107,8 +107,14 @@ const initCarButtons = () => {
  */
 function onSelectCar(carConfiguration) {
   this.disabled = true;
+  console.log(this, "onSelectCar");
 
-  const car = new Coche(carConfiguration.marca, carConfiguration.modelo);
+  const car = new Coche(
+    carConfiguration.marca,
+    carConfiguration.modelo,
+    carConfiguration.img
+  );
+
   teamCarsList.push(car);
 
   // Cambiar el estado del team que selecciona
@@ -133,7 +139,7 @@ const setCarButtonsEnabled = (enabled) => {
  */
 const raceConfiguration = {
   steps: 3,
-  stepMeters: 100,
+  stepMeters: 500,
 };
 
 const hasTeamFinish = (team, raceConfiguration) => {
@@ -206,14 +212,17 @@ function drawRacerState(raceCarsList) {
     const divMarca = document.createElement("div");
     const divModelo = document.createElement("div");
     const divMetros = document.createElement("div");
+    const img = document.createElement("img");
 
     divMarca.innerText = car.marca;
     divModelo.innerText = car.modelo;
     divMetros.innerText = car.metrosRecorridos + " metros";
+    img.src = car.img;
 
     div.appendChild(divMarca);
     div.appendChild(divModelo);
     div.appendChild(divMetros);
+    div.appendChild(img);
 
     return div;
   });
