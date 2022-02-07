@@ -7,11 +7,11 @@ let team2 = null;
 let ganador = null;
 
 const configuracion = {
-  vueltas: 3,
-  metrosPorVuelta: 100,
+  steps: 3,
+  stepMeters: 100,
 };
 
-const metrosTotales = configuracion.vueltas * configuracion.metrosPorVuelta;
+const metrosTotales = configuracion.vueltas * configuracion.stepMeters;
 function avanzar() {
   team1.avanzar();
   team2.avanzar();

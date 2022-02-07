@@ -125,6 +125,23 @@ const setCarButtonsEnabled = (enabled) => {
   buttons.forEach((button) => (button.disabled = !enabled));
 };
 
+const raceConfiguration = {
+  steps: 3,
+  stepMeters: 100,
+};
+
+const hasTeamFinish = (team, raceConfiguration) => {
+  const { steps, stepMeters } = raceConfiguration;
+
+  const totalMeters = steps * stepMeters;
+
+  return team.metrosRecorridos >= totalMeters;
+};
+
+const hasRaceEnd = (teams, raceConfiguration) => {
+  return teams.every((team) => hasTeamFinish(team, raceConfiguration));
+};
+
 const startGame = () => {
   setTimeout(() => {
     cambiaPantalla(2);
@@ -132,20 +149,27 @@ const startGame = () => {
 
     window.addEventListener("keydown", onKeyDown);
 
-    function onKeyDown(evento) {
-      if (evento.keyCode === 39) {
-        runCars();
-        drawRacerState();
-
-        // TODO:
-
-        // actualizarGanador();
-        // if (ganador !== null) {
-        //   window.removeEventListener("keydown", onKeyDown);
-        //   cambiaPantalla(3);
-        //   mostrarDatosCarrera();
-        // }
+    function onKeyDown(event) {
+      if (event.repeat || event.keyCode !== 39) {
+        return;
       }
+
+      runCars();
+      drawRacerState();
+
+      if (hasRaceEnd(teamCarsList, raceConfiguration)) {
+        // la carrera ha acabado
+        console.log("La carrera ha acabado");
+      }
+
+      // TODO:
+
+      // actualizarGanador();
+      // if (ganador !== null) {
+      //   window.removeEventListener("keydown", onKeyDown);
+      //   cambiaPantalla(3);
+      //   mostrarDatosCarrera();
+      // }
     }
   }, 2500);
 };
@@ -187,3 +211,7 @@ const runCars = () => {
  * Inicialiazamos
  */
 initCarButtons();
+
+/**
+ * cambiar nombres a ingles
+ */
