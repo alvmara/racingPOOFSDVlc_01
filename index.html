@@ -1,65 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/page.js/1.11.6/page.js"></script>
 </head>
 <body>
-    
+
+    <div id="app"></div>
     
     <!--Pagina principal-->
-    <section id="screen0">
-        <div class="designScreen0">
-            <div style="margin-left: 20px;">
-                <h1>Gran Turismo</h1>
-                <button onclick="cambiaPantalla(1)">Haz click para empezar</button>
+    <template id="screen-home">
+        <section>
+            <div class="designScreen0">
+                <div style="margin-left: 20px;">
+                    <h1>Gran Turismo</h1>
+                    <button onclick="cambiaPantalla('car-chossing')">Haz click para empezar</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </template>
 
     <!--Pagina de sleccion de coches-->
-    <section id="screen1" style="display:none">
-        <div class="designScreen1">
-            <h1 class="player-car-chossing-title">Elige el coche para el jugador <span id="player-car-chossing-number"></span> </h1>
-
-            <div class="carOptions">
-                <!--Aqui es donde se añadirán los botones de sleccion de coche-->
+    <template id="screen-car-chossing">
+        <section>
+            <div class="designScreen1">
+                <h1 class="player-car-chossing-title">Elige el coche para el jugador <span id="player-car-chossing-number"></span> </h1>
+    
+                <div class="carOptions">
+                    <!--Aqui es donde se añadirán los botones de sleccion de coche-->
+                </div>
+    
+                <!-- <div class="carSelection"></div> -->
             </div>
-
-
-            <!-- <div class="carSelection"></div> -->
-        </div>
-    </section>
+        </section>
+    </template>
 
     <!--Pagina de la carrera-->
-    <section id="screen2" style="display:none" onclick="cambiaPantalla(2)">
-        <div class="designScreen2">
-            <div id="racer-container">
-                <!--Aqui es donde se van a añadir los cocohes y sus km recorridos-->
+    <template id="screen-race-game">
+        <section>
+            <div class="designScreen2">
+                <div id="racer-container">
+                    <!--Aqui es donde se van a añadir los cocohes y sus km recorridos-->
+                </div>
+    
+    
+                <!-- <div id="team1-metros">
+                    <p>Team 1: <span class="metros">0</span> Km</p>
+                </div>
+                <div id="team2-metros">
+                    <p>Team 2: <span class="metros">0</span> Km</p>
+                </div> -->
             </div>
-
-
-            <!-- <div id="team1-metros">
-                <p>Team 1: <span class="metros">0</span> Km</p>
-            </div>
-            <div id="team2-metros">
-                <p>Team 2: <span class="metros">0</span> Km</p>
-            </div> -->
-        </div>
-    </section>
+        </section>
+    </template>
 
     <!--Pagina de ranking de ganador-->
-    <section id="screen3" style="display:none" onclick="cambiaPantalla(0); cleanGame()">
-        <div class="designScreen3"></div>
-    </section>
+    <template id="screen-ranking">
+        <section>
+            <div class="designScreen3"></div>
+        </section>
+    </template>
 
     <script src="js/teams.js"></script>
     <script src="js/cars.js"></script>

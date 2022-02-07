@@ -81,6 +81,8 @@ const createCarButton = (carConfiguration) => {
   const button = document.createElement("button");
   const img = document.createElement("img");
 
+  console.log("create car button", container);
+
   /**
    * añadimos el evento de click al boton de seleccion de coche
    * de momento ponemos aqui toda la logica del juego
@@ -95,6 +97,7 @@ const createCarButton = (carConfiguration) => {
 };
 
 const initCarButtons = () => {
+  console.log("init card buttons");
   carsConfiguration.forEach((coche) => createCarButton(coche));
 };
 
@@ -144,7 +147,7 @@ const hasRaceEnd = (teams, raceConfiguration) => {
 
 const startGame = () => {
   setTimeout(() => {
-    cambiaPantalla(2);
+    cambiaPantalla("race-game");
     drawRacerState();
 
     window.addEventListener("keydown", onKeyDown);
@@ -161,15 +164,6 @@ const startGame = () => {
         // la carrera ha acabado
         console.log("La carrera ha acabado");
       }
-
-      // TODO:
-
-      // actualizarGanador();
-      // if (ganador !== null) {
-      //   window.removeEventListener("keydown", onKeyDown);
-      //   cambiaPantalla(3);
-      //   mostrarDatosCarrera();
-      // }
     }
   }, 2500);
 };
@@ -210,7 +204,7 @@ const runCars = () => {
 /**
  * Inicialiazamos
  */
-initCarButtons();
+// initCarButtons();
 
 /**
  * cambiar nombres a ingles

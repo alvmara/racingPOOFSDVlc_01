@@ -23,28 +23,28 @@
 //   document.querySelectorAll("button").forEach(enableButtons);
 // };
 
-const cambiaPantalla = (cambio) => {
+const cambiaPantalla = (screenName) => {
   //Generamos la variable concatenada que nos advierte a que pantalla
   //queremos ir.
-  let pantallaDeseada = "screen" + cambio;
+  const pantallaDeseada = "screen-" + screenName;
 
-  //Cada vez que entramos en la funcion se regenera el array con todas las pantallas, ya
-  //que anteriormente al filtrar algunas quedaban fuera, así empieza de nuevo el proceso
-  let arrayPantallas = ["screen0", "screen1", "screen2", "screen3"];
+  const template = document.getElementById(pantallaDeseada);
 
-  //Aquí filtramos del array aquella pantalla a la que queremos ir, ES DECIR,
-  //guardamos todas las pantallas menos aquella a la que queremos ir, ya que al resto a todas
-  //les queremos dar la propiedad display none
-  arrayPantallas = arrayPantallas.filter(
-    (valor) => !pantallaDeseada.includes(valor)
-  );
+  document.getElementById("app").innerHTML = "";
 
-  //Antes de dar la propiedad display none al resto de pantallas, decimos a la que SI QUEREMOS
-  //ver que tenga un display block, que la hará visible en el DOM (la web)
-  document.getElementById(pantallaDeseada).style.display = "block";
+  document.getElementById("app").appendChild(template.content);
 
-  //Recorremos el array de las pantallas y a todas las que hay les damos la propiedad display como none
-  for (let pantalla of arrayPantallas) {
-    document.getElementById(pantalla).style.display = "none";
-  }
+  doAfterChange(screenName);
 };
+
+function doAfterChange(screenName) {
+  if (screenName === "car-chossing") {
+    initCarButtons();
+    drawActualSelectingTeam();
+  }
+
+  if (screenName === "race-game") {
+  }
+}
+
+cambiaPantalla("home");

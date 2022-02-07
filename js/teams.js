@@ -40,4 +40,5 @@ const drawActualSelectingTeam = () => {
 /**
  * Inicialiazamos
  */
-drawActualSelectingTeam();
+
+// drawActualSelectingTeam();
