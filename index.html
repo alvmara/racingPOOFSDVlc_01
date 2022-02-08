@@ -28,7 +28,7 @@
             <div class="designScreen0">
                 <div style="margin-left: 20px;">
                     <h1>Gran Turismo</h1>
-                    <button onclick="cambiaPantalla('car-chossing')">Haz click para empezar</button>
+                    <button onclick="changeScreen('car-chossing')">Haz click para empezar</button>
                 </div>
             </div>
         </section>
@@ -71,7 +71,13 @@
     <!--Pagina de ranking de ganador-->
     <template id="screen-ranking">
         <section>
-            <div class="designScreen3"></div>
+            <div class="designScreen3">
+                <div id="race-ranking"></div>
+
+                <button onclick="newRace()">Nueva carrera</button>
+    
+                <button onclick="restartRaceWithSameTeams()">Empezar con los mismos equipos</button>
+            </div>
         </section>
     </template>
 

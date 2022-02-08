@@ -36,9 +36,3 @@ const drawActualSelectingTeam = () => {
   document.getElementById("player-car-chossing-number").innerText =
     actualSelectingTeam;
 };
-
-/**
- * Inicialiazamos
- */
-
-// drawActualSelectingTeam();

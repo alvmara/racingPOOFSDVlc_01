@@ -81,7 +81,7 @@ const createCarButton = (carConfiguration) => {
   const button = document.createElement("button");
   const img = document.createElement("img");
 
-  console.log("create car button", container);
+  //console.log("create car button", container);
 
   /**
    * añadimos el evento de click al boton de seleccion de coche
@@ -97,7 +97,7 @@ const createCarButton = (carConfiguration) => {
 };
 
 const initCarButtons = () => {
-  console.log("init card buttons");
+  //console.log("init card buttons");
   carsConfiguration.forEach((coche) => createCarButton(coche));
 };
 
@@ -107,7 +107,7 @@ const initCarButtons = () => {
  */
 function onSelectCar(carConfiguration) {
   this.disabled = true;
-  console.log(this, "onSelectCar");
+  //console.log(this, "onSelectCar");
 
   const car = new Coche(
     carConfiguration.marca,
@@ -138,8 +138,8 @@ const setCarButtonsEnabled = (enabled) => {
  * Lógica de la carrera (El juego)
  */
 const raceConfiguration = {
-  steps: 3,
-  stepMeters: 500,
+  steps: 1,
+  stepMeters: 100,
 };
 
 const hasTeamFinish = (team, raceConfiguration) => {
@@ -150,54 +150,53 @@ const hasTeamFinish = (team, raceConfiguration) => {
   return team.metrosRecorridos >= totalMeters;
 };
 
-// const hasRaceEnd = (teams, raceConfiguration) => {
-//   return teams.every((team) => hasTeamFinish(team, raceConfiguration));
-// };
-
 let ranking = [];
 
 const startGame = () => {
-  setTimeout(() => {
-    let raceCarsList = [...teamCarsList];
+  let raceCarsList = [...teamCarsList];
 
-    cambiaPantalla("race-game");
+  changeScreen("race-game");
+  drawRacerState(raceCarsList);
+
+  window.addEventListener("keydown", onKeyDown);
+
+  function onKeyDown(event) {
+    if (event.repeat || event.keyCode !== 39) {
+      return;
+    }
+
+    runCars(raceCarsList);
     drawRacerState(raceCarsList);
 
-    window.addEventListener("keydown", onKeyDown);
+    const finishedCars = raceCarsList.filter((car) =>
+      hasTeamFinish(car, raceConfiguration)
+    );
 
-    function onKeyDown(event) {
-      if (event.repeat || event.keyCode !== 39) {
-        return;
-      }
+    const notFinishedCars = raceCarsList.filter(
+      (car) => !hasTeamFinish(car, raceConfiguration)
+    );
 
-      runCars(raceCarsList);
-      drawRacerState(raceCarsList);
+    ranking = [...ranking, ...finishedCars];
 
-      const finishedCars = raceCarsList.filter((car) =>
-        hasTeamFinish(car, raceConfiguration)
-      );
+    raceCarsList = notFinishedCars;
 
-      const notFinishedCars = raceCarsList.filter(
-        (car) => !hasTeamFinish(car, raceConfiguration)
-      );
+    const hasRaceEnd = raceCarsList.length === 0;
 
-      ranking = [...ranking, ...finishedCars];
+    if (hasRaceEnd) {
+      //console.log("La carrera ha acabado");
 
-      raceCarsList = notFinishedCars;
+      window.removeEventListener("keydown", onKeyDown);
 
-      console.log(ranking);
+      changeScreen("ranking");
 
-      const hasRaceEnd = raceCarsList.length === 0;
-
-      if (hasRaceEnd) {
-        console.log("La carrera ha acabado");
-
-        window.removeEventListener("keydown", onKeyDown);
-
-        cambiaPantalla("ranking");
-      }
+      // Mostrar el ranking en la pantalla
+      showRanking();
     }
-  }, 2500);
+  }
+};
+
+const runCars = (raceCarsList) => {
+  raceCarsList.forEach((car) => car.run());
 };
 
 function drawRacerState(raceCarsList) {
@@ -232,15 +231,30 @@ function drawRacerState(raceCarsList) {
   divsInfo.forEach((div) => container.appendChild(div));
 }
 
-const runCars = (raceCarsList) => {
-  raceCarsList.forEach((car) => car.run());
-};
+function showRanking() {
+  const container = document.getElementById("race-ranking");
 
-/**
- * Inicialiazamos
- */
-// initCarButtons();
+  let divsInfo = ranking.map((car) => {
+    const div = document.createElement("div");
+    const divMarca = document.createElement("div");
+    const divModelo = document.createElement("div");
+    const divMetros = document.createElement("div");
+    const img = document.createElement("img");
 
-/**
- * cambiar nombres a ingles
- */
+    divMarca.innerText = car.marca;
+    divModelo.innerText = car.modelo;
+    divMetros.innerText = car.metrosRecorridos + " metros";
+    img.src = car.img;
+
+    div.appendChild(divMarca);
+    div.appendChild(divModelo);
+    div.appendChild(divMetros);
+    div.appendChild(img);
+
+    return div;
+  });
+
+  [...(container.children || [])].forEach((div) => container.removeChild(div));
+
+  divsInfo.forEach((div) => container.appendChild(div));
+}

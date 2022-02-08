@@ -1,38 +1,41 @@
-// //Funciones
+function cleanCommons() {
+  // metros recorridos de los coches
+  for (const team of teamCarsList) {
+    team.resetMeters();
+  }
 
-// const cleanGame = () => {
-//   console.log("limpiando variables");
-//   //Limpiar kilometros recorridos de los coches
-//   team1.resetearMetros();
-//   team2.resetearMetros();
+  // Limpiamos el ranking
+  ranking = [];
+}
 
-//   //Limpiar los datos de carrera
-//   actualizarContador(team1, 1);
-//   actualizarContador(team2, 2);
+function newRace() {
+  //console.log("new race");
 
-//   //Limpiar los nombres elegidos
-//   document.getElementById("data-team-1").innerText = "";
-//   document.getElementById("data-team-2").innerText = "";
-//   //Limpiar
+  cleanCommons();
 
-//   // Habilitamos los botones
-//   const enableButtons = (button) => {
-//     button.disabled = false;
-//   };
+  clearTeams();
 
-//   document.querySelectorAll("button").forEach(enableButtons);
-// };
+  // Cambiar a la pantalla de selección de equipos
+  changeScreen("car-chossing");
+}
 
-const cambiaPantalla = (screenName) => {
+function restartRaceWithSameTeams() {
+  cleanCommons();
+
+  // Cambiar a la pantalla de carrera
+  startGame();
+}
+
+const changeScreen = (screenName) => {
   //Generamos la variable concatenada que nos advierte a que pantalla
   //queremos ir.
-  const pantallaDeseada = "screen-" + screenName;
+  const desiredScreen = "screen-" + screenName;
 
-  const template = document.getElementById(pantallaDeseada);
+  const template = document.getElementById(desiredScreen);
 
   document.getElementById("app").innerHTML = "";
 
-  document.getElementById("app").appendChild(template.content);
+  document.getElementById("app").appendChild(template.content.cloneNode(true));
 
   doAfterChange(screenName);
 };
@@ -47,4 +50,4 @@ function doAfterChange(screenName) {
   }
 }
 
-cambiaPantalla("home");
+changeScreen("home");
