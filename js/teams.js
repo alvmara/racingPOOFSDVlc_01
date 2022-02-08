@@ -8,7 +8,7 @@ let teamCarsList = [];
 /**
  * teams numbers son el numero de teams que van a competir
  */
-const teamsNumber = 4;
+const teamsNumber = 2;
 
 /**
  * el team que esta selecccionando coche actualmente

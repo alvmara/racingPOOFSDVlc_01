@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/home.css" rel="stylesheet">
-        <link href="css/car-chossing.css" rel="stylesheet">
-        <link href="css/race-game.css" rel="stylesheet">
-        <link href="css/ranking.css" rel="stylesheet">
-        
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/page.js/1.11.6/page.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
+    <link href="css/car-chossing.css" rel="stylesheet">
+    <link href="css/race-game.css" rel="stylesheet">
+    <link href="css/ranking.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/page.js/1.11.6/page.js"></script>
 </head>
+
 <body>
 
     <div id="app"></div>
-    
+
     <!--Pagina principal-->
     <template id="screen-home">
         <section>
@@ -38,12 +40,13 @@
     <template id="screen-car-chossing">
         <section>
             <div class="designScreen1">
-                <h1 class="player-car-chossing-title">Elige el coche para el jugador <span id="player-car-chossing-number"></span> </h1>
-    
+                <h1 class="player-car-chossing-title">Elige el coche para el jugador <span
+                        id="player-car-chossing-number"></span> </h1>
+
                 <div class="carOptions">
                     <!--Aqui es donde se añadirán los botones de sleccion de coche-->
                 </div>
-    
+
                 <!-- <div class="carSelection"></div> -->
             </div>
         </section>
@@ -56,14 +59,7 @@
                 <div id="racer-container">
                     <!--Aqui es donde se van a añadir los cocohes y sus km recorridos-->
                 </div>
-    
-    
-                <!-- <div id="team1-metros">
-                    <p>Team 1: <span class="metros">0</span> Km</p>
-                </div>
-                <div id="team2-metros">
-                    <p>Team 2: <span class="metros">0</span> Km</p>
-                </div> -->
+
             </div>
         </section>
     </template>
@@ -73,10 +69,10 @@
         <section>
             <div class="designScreen3">
                 <div id="race-ranking"></div>
-
-                <button onclick="newRace()">Nueva carrera</button>
-    
-                <button onclick="restartRaceWithSameTeams()">Empezar con los mismos equipos</button>
+                <div class="actions">
+                    <button onclick="newRace()">Nueva carrera</button>
+                    <button onclick="restartRaceWithSameTeams()">Empezar con los mismos equipos</button>
+                </div>
             </div>
         </section>
     </template>
@@ -85,4 +81,5 @@
     <script src="js/cars.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
