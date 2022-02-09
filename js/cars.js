@@ -1,3 +1,8 @@
+const raceConfiguration = {
+  steps: 3,
+  stepMeters: 1000,
+};
+
 const carsConfiguration = [
   {
     marca: "Lexus",
@@ -137,10 +142,6 @@ const setCarButtonsEnabled = (enabled) => {
 /**
  * Lógica de la carrera (El juego)
  */
-const raceConfiguration = {
-  steps: 1,
-  stepMeters: 100,
-};
 
 const hasTeamFinish = (team, raceConfiguration) => {
   const { steps, stepMeters } = raceConfiguration;
@@ -157,6 +158,11 @@ const startGame = () => {
 
   changeScreen("race-game");
   drawRacerState(raceCarsList);
+
+  document.getElementById("stepNumber").innerText = raceConfiguration.steps;
+  document.getElementById(
+    "stepMeters"
+  ).innerText = `${raceConfiguration.stepMeters} metros`;
 
   window.addEventListener("keydown", onKeyDown);
 
